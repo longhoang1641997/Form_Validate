@@ -163,9 +163,17 @@
     <script >
         Validator({
             form: '#form-1',
+            form_group: '.form-group',
+            errMsg : '.form-message',
             rules: [
-                Validator.isRequired('#fullname'),
-                Validator.isEmail('#email'),
+                Validator.isRequired('#fullname',''),
+                Validator.isRequired('#email','Please enter email'),
+                Validator.isEmail('#email', ''),
+                Validator.isPassword('#password', '', 6),
+                Validator.isRequired('#password_confirmation', 'Please enter password first'),
+                Validator.isConfirmPassword('#password_confirmation', '', function() {
+                    return document.querySelector('#form-1').querySelector('#password').value
+                })
             ]
 
         })
